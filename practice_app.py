@@ -5,9 +5,6 @@ from flask import Flask
 # create the application object
 app = Flask(__name__)
 
-# Error Handling
-app.config["DEBUG"] = True
-
 # use the decorator pattern to
 # link the view function to a url
 @app.route("/")
@@ -17,18 +14,23 @@ app.config["DEBUG"] = True
 def hello_world():
     return "Hello, World!"
 
-# Dynamic route
-@app.route("/test/<search_query>")
-def search(search_query):
-    return search_query
+# Route Handler 1
+@app.route("/integer/<int:value>")
+def int_type(value):
+    print(value + 1)
+    return "correct"
 
-# Dynamic route with explicit status code
-@app.route("/name/<name>")
-def index(name):
-    if name.lower() == "alok":
-        return "Hello, {}".format(name)
-    else:
-        return "Not Found", 404
+# Route Handler 2
+@app.route("/float/<float:value>")
+def float_type(value):
+    print(value + 1)
+    return "correct"
+
+# Route Handler 3
+@app.route("/path/<path:value>")
+def path_type(value):
+    print(value)
+    return "correct"
 
 
 # start the development server using the run() method
